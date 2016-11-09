@@ -8,17 +8,18 @@ using System.Web;
 using System.Web.Mvc;
 using MovieShopDll.Entities;
 using MyMovieShopAdmin.DAL;
+using MovieShopDll;
 
 namespace MovieShopAdmin.Controllers
 {
     public class MoviesController : Controller
     {
-        private MovieShopDBContext db = new MovieShopDBContext();
+        IServiceGateway<Movie> mg = new DllFacade().GetServiceGatewayMovies();
 
         // GET: Movies
         public ActionResult Index()
         {
-            return View(db.Movies.ToList());
+            return View(mg.Read());
         }
 
         // GET: Movies/Details/5
@@ -28,7 +29,7 @@ namespace MovieShopAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = db.Movies.Find(id);
+            Movie movie = mg.Read(id.Value);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -51,8 +52,7 @@ namespace MovieShopAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Movies.Add(movie);
-                db.SaveChanges();
+                mg.Create(movie);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +66,7 @@ namespace MovieShopAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = db.Movies.Find(id);
+            Movie movie = mg.Read(id.Value);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -83,8 +83,7 @@ namespace MovieShopAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(movie).State = EntityState.Modified;
-                db.SaveChanges();
+                mg.Update(movie);
                 return RedirectToAction("Index");
             }
             return View(movie);
@@ -97,7 +96,7 @@ namespace MovieShopAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = db.Movies.Find(id);
+            Movie movie = mg.Read(id.Value);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -110,19 +109,10 @@ namespace MovieShopAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Movie movie = db.Movies.Find(id);
-            db.Movies.Remove(movie);
-            db.SaveChanges();
+            mg.Delete(id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+     
     }
 }

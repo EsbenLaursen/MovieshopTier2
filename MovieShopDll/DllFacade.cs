@@ -1,5 +1,6 @@
 ﻿using MovieShopDll.Entities;
 using MovieShopDll.Managers;
+using MovieShopDll.ServiceGatewaiiiz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,22 +11,21 @@ namespace MovieShopDll
 {
     public class DllFacade
     {
-
-        public IManager<Genre> GetGenreManager()
+        public IServiceGateway<Movie> GetServiceGatewayMovies()
         {
-            return new GenreManager();
+            return new ServiceGatewayMovie();
         }
-        public IManager<Movie> GetMovieManager()
+        public IServiceGateway<Customer> GetServiceGatewayCustomer()
         {
-            return new MovieManager();
+            return new ServiceGatewayCustomer();
         }
-        public IManager<Customer> GetCustomerManager()
+        public IServiceGateway<Order> GetServiceGatewayOrder()
         {
-            return new CustomerManager();
+            return new ServiceGatewayOrder();
         }
-        public IManager<Order> GetOrderManager()
+        public IServiceGateway<Genre> GetServiceGatewayGenre()
         {
-            return new OrderManager();
+            return new ServiceGatewayGenre();
         }
     }
 }
