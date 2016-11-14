@@ -10,10 +10,10 @@ namespace MyMovieShopAdmin.Controllers
 {
     public class ShoppingcartController : ApplicationController
     {
-        IManager<Movie> mm = new DllFacade().GetMovieManager();
-        IManager<Customer> cm = new DllFacade().GetCustomerManager();
-        IManager<Order> om = new DllFacade().GetOrderManager();
-        
+        IServiceGateway<Movie> mm = new DllFacade().GetServiceGatewayMovies();
+        IServiceGateway<Customer> cm = new DllFacade().GetServiceGatewayCustomer();
+        IServiceGateway<Order> om = new DllFacade().GetServiceGatewayOrder();
+
         public ActionResult Index()
         {
             HomeShoppingCartViewModel viewModel = new HomeShoppingCartViewModel()

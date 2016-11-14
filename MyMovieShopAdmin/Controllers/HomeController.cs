@@ -15,10 +15,12 @@ namespace MyMovieShopAdmin.Controllers
 
     public class HomeController : ApplicationController
     {
-        IManager<Movie> mm = new DllFacade().GetMovieManager();
-        IManager<Customer> cm = new DllFacade().GetCustomerManager();
-        IManager<Order> om = new DllFacade().GetOrderManager();
-        IManager<Genre> gm = new DllFacade().GetGenreManager();
+        
+
+        IServiceGateway<Movie> mm = new DllFacade().GetServiceGatewayMovies();
+        IServiceGateway<Customer> cm = new DllFacade().GetServiceGatewayCustomer();
+        IServiceGateway<Order> om = new DllFacade().GetServiceGatewayOrder();
+        IServiceGateway<Genre> gm = new DllFacade().GetServiceGatewayGenre();
 
         public ActionResult Index()
         {

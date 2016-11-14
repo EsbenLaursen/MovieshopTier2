@@ -12,7 +12,8 @@ namespace MyMovieShopAdmin.Controllers
 {
     public class AccountController : Controller
     {
-        IManager<Customer> cm = new DllFacade().GetCustomerManager();
+
+        IServiceGateway<Customer> cm = new DllFacade().GetServiceGatewayCustomer();
         public ActionResult Index()
         {
             return View();

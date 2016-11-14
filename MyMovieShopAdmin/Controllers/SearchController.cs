@@ -13,8 +13,8 @@ namespace MyMovieShopAdmin.Controllers
     public class SearchController : ApplicationController
     {
         // GET: Search
-        IManager<Movie> mm = new DllFacade().GetMovieManager();
-    
+        IServiceGateway<Movie> mm = new DllFacade().GetServiceGatewayMovies();
+
         public ActionResult Index(int? page)
         {
             List<Movie> Moviez = SearchCriteria.Movies;

@@ -81,10 +81,6 @@
     <Compile Include="Entities\Order.cs" />
     <Compile Include="IManager.cs" />
     <Compile Include="ServiceGatewaiiiz\IServiceGateway.cs" />
-    <Compile Include="Managers\AbstractManager.cs" />
-    <Compile Include="Managers\CustomerManager.cs" />
-    <Compile Include="Managers\MovieManager.cs" />
-    <Compile Include="Managers\OrderManager.cs" />
     <Compile Include="Pager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchCriteria.cs" />

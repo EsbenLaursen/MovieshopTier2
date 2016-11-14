@@ -11,13 +11,13 @@ namespace MyMovieShopAdmin.Controllers
 {
     public class MovieController : ApplicationController
     {
-        IManager<Movie> mm = new DllFacade().GetMovieManager();
+        IServiceGateway<Movie> gm = new DllFacade().GetServiceGatewayMovies();
         // GET: Movie
         [HttpGet]
         public ActionResult Index(int id)
         {
             MoviesIndexViewModel viewModel = new MoviesIndexViewModel() {
-                Movie = mm.Read(id)
+                Movie = gm.Read(id)
             };
             return View(viewModel);
         }
@@ -25,7 +25,7 @@ namespace MyMovieShopAdmin.Controllers
         [HttpPost]
         public ActionResult Added(int id)
         {
-            CartItems.Movies.Add(mm.Read(id));
+            CartItems.Movies.Add(gm.Read(id));
             return View();
         }
     }

@@ -1,5 +1,4 @@
 ﻿using MovieShopDll.Entities;
-using MovieShopDll.Managers;
 using MovieShopDll.ServiceGatewaiiiz;
 using System;
 using System.Collections.Generic;
